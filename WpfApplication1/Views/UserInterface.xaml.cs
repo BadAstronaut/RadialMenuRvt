@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApplication1.Models;
+using WpfApplication1.ViewModels;
 
 namespace WpfApplication1.Views
 {
@@ -22,9 +23,16 @@ namespace WpfApplication1.Views
     /// </summary>
     public partial class UserInterface : Window
     {
+        MainViewModel _main = new MainViewModel();
+
         public UserInterface()
         {
             InitializeComponent();
+            DataContext = _main;
+            if (ProfileBox.SelectedIndex==0)
+            {
+                _main.RadialMenuProfile1();
+            }
         }
 
         private void SearchIcon_Click(object sender, RoutedEventArgs e)
@@ -52,20 +60,37 @@ namespace WpfApplication1.Views
             }
 
         }
-    }
 
-    public class radialSender : INotifyPropertyChanged
-    {
-
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
+            _main.CallButton1();
         }
+
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+            _main.CallButton2();
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            //InterOpsLibrary.SendProfile();
+        }
+
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            _main.CallButton3();
+        }
+
+        private void Button4_Click(object sender, RoutedEventArgs e)
+        {
+            _main.CallButton4();
+        }
+
+        private void Button5_Click(object sender, RoutedEventArgs e)
+        {
+            _main.CallButton5();
+        }
+
     }
+
 }

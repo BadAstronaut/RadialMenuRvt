@@ -63,7 +63,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="Auto" MinWidth="117" />
@@ -85,22 +85,24 @@
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Label Content="Seleccionar Perfil:" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"></Label>
-        <ComboBox Grid.Column="2" Grid.Row="1">
-            <ComboBoxItem Content="Perfil 1"></ComboBoxItem>
+        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="ProfileBox">
+            <ComboBoxItem Content="Perfil 1" IsSelected="True"></ComboBoxItem>
             <ComboBoxItem Content="Perfil 2"></ComboBoxItem>
         </ComboBox>
 
         <Label Grid.Column="3" Grid.Row="1"
                Content="Configuracion de Botones" 
                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="62,0,63,0" Height="30" Width="147" />
-        <Label Grid.Column="3" Grid.Row="2" Content="Nombre del Boton " />
-        <TextBox Grid.Column="3" Grid.Row="3" x:Name="ButtonName" Margin="0,0,0,5" />
+        <Label Grid.Column="3" Grid.Row="2" Content="Nombre Del Comando" />
+        <TextBox Grid.Column="3" Grid.Row="3" x:Name="ButtonName" Margin="0,0,0,5" 
+                 Text="{Binding Button.Name , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Grid.Column="3" Grid.Row="4" Content="Inserte Atajo en el Teclado:" />
-        <TextBox Grid.Column="3" Grid.Row="5" x:Name="ShortcutName" />
+        <TextBox Grid.Column="3" Grid.Row="5"
+                 Text="{Binding Button.Shortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Seleccionar Icono:" Grid.Column="3" Grid.Row="6"></Label>
         <Button x:Name="SearchIcon" Content="Seleccionar Icono" Grid.Column="3" Grid.Row="7" Click="SearchIcon_Click" ></Button>
         <Button Grid.Column="3" Grid.Row="8" x:Name="UpdateButton"
-                    Content="Actualizar" Margin="0,29,0,-23" Grid.RowSpan="3" />
+                    Content="Actualizar" Margin="0,29,0,-23" Grid.RowSpan="3" Click="UpdateButton_Click" />
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="2"
                    VerticalAlignment="Top" Dock="Left" Height="300" RenderTransformOrigin="0.494,0.65"
                    >
@@ -114,23 +116,24 @@
                 </controls:RadialMenu.CentralItem>
 
                 <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}"
-                                     x:Name="Button1" >
+                                     x:Name="Button1" Click="Button1_Click"   
+                                         >
                     <Image  Height="23"/>
                 </controls:RadialMenuItem>
                 <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button2" >
+                                     x:Name="Button2" Click="Button2_Click" >
                     <Image  Height="23"/>
                 </controls:RadialMenuItem>
                 <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button3" >
+                                     x:Name="Button3" Click="Button3_Click" >
                     <Image  Height="23"/>
                 </controls:RadialMenuItem>
                 <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button4" >
+                                     x:Name="Button4" Click="Button4_Click" >
                     <Image  Height="23"/>
                 </controls:RadialMenuItem>
                 <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button5" >
+                                     x:Name="Button5" Click="Button5_Click" >
                     <Image  Height="23"/>
                 </controls:RadialMenuItem>
 

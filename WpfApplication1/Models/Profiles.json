@@ -1,0 +1,66 @@
+[
+  {
+    "B1": {
+      "Name": "Load Element",
+      "Shortcut": "LO",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    },
+    "B2": {
+      "Name": "Copy Element",
+      "Shortcut": "CO",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Copiar Elementos"
+    },
+    "B3": {
+      "Name": "Window",
+      "Shortcut": "WN",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    },
+    "B4": {
+      "Name": "Door",
+      "Shortcut": "DR",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    },
+    "B5": {
+      "Name": "Column",
+      "Shortcut": "CL",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    }
+  },
+  {
+    "B1": {
+      "Name": "Load Element",
+      "Shortcut": "LO",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    },
+    "B2": {
+      "Name": "Copy Element",
+      "Shortcut": "CO",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Copiar Elementos"
+    },
+    "B3": {
+      "Name": "Window",
+      "Shortcut": "WN",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    },
+    "B4": {
+      "Name": "Door",
+      "Shortcut": "DR",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    },
+    "B5": {
+      "Name": "Column",
+      "Shortcut": "CL",
+      "IconPath": "\\Icons\\LoadF.png",
+      "Tooltip": "Cargar Elementos"
+    }
+  }
+]
