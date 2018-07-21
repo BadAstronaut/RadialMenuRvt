@@ -1,73 +1,30 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
-using System.Drawing.Text;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using WpfApplication1.ViewModels;
 
 namespace WpfApplication1.Models
 {
-    class InterOpsLibrary
+    public class InterOpsLibrary
     {
-        private static string filePath = Path.Combine(Environment.CurrentDirectory, @"Models\Profiles.json");
-        private static RadialMenuViewModel BaseRadialMenu()
-        {
-            var rm= new RadialMenuViewModel();
-            rm.B1= new ButtonViewModel() {Name = "Load Element", Shortcut = "LO",IconPath = @"\Icons\LoadF.png", Tooltip = "Cargar Elementos"};
-            rm.B2=new ButtonViewModel() { Name = "Copy Element", Shortcut = "CO", IconPath = @"\Icons\LoadF.png", Tooltip = "Copiar Elementos" };
-            rm.B3=new ButtonViewModel() { Name = "Window", Shortcut = "WN", IconPath = @"\Icons\LoadF.png", Tooltip = "Cargar Elementos" };
-            rm.B4=new ButtonViewModel() { Name = "Door", Shortcut = "DR", IconPath = @"\Icons\LoadF.png", Tooltip = "Cargar Elementos" };
-            rm.B5=new ButtonViewModel() { Name = "Column", Shortcut = "CL", IconPath = @"\Icons\LoadF.png", Tooltip = "Cargar Elementos" };
-            return rm;
-        }
+        private static readonly string FilePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Models\Profiles.json");
 
-        private static List<RadialMenuViewModel> Profiles()
+        public static void SaveConfig(IList<RadialMenuConfig> config)
         {
-            var counter = 0;
-            var radialProfiles = new List<RadialMenuViewModel>();
-            while (counter<2)
+            using (var file = File.CreateText(FilePath))
             {
-                radialProfiles.Add(BaseRadialMenu());
-                counter += 1;
+                var serializer = new JsonSerializer();
+                serializer.Serialize(file, config);
             }
-
-            return radialProfiles;
         }
-        #region "serializeJson"
 
-        public static void SendProfile()
+        public static IList<RadialMenuConfig> ReadMenuConfig()
         {
-            
-            var sendRadial = Profiles();
-            using (StreamWriter file = File.CreateText(filePath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file,sendRadial);
-            }
-            
-            
+            var json = File.ReadAllText(FilePath);
+
+            var obj = JsonConvert.DeserializeObject<IList<RadialMenuConfig>>(json);
+
+            return obj;
         }
-
-        #endregion
-
-        #region "GetProfiles from Json"
-        
-        public static RadialMenuViewModel getProfile1()
-        {
-            string json = File.ReadAllText(filePath);
-            var Radialmenus = JsonConvert.DeserializeObject<List<RadialMenuViewModel>>(json);
-
-            return Radialmenus[0];
-        }
-        
-
-        #endregion
     }
 }

@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1.Views"
+        xmlns:converters="clr-namespace:WpfApplication1.Infrastructure.Converters"
         xmlns:controls="clr-namespace:RadialMenu.Controls;assembly=RadialMenu"
         mc:Ignorable="d"
         Title="UserInterface" Height="400" Width="600">
     <Window.Resources>
         <!--A Style that affects all Close Item-->
-        <Style x:Key="FancyRadialMenuCentralItem" TargetType="controls:RadialMenuCentralItem" BasedOn="{StaticResource {x:Type controls:RadialMenuCentralItem}}">
+        <Style x:Key="FancyRadialMenuCentralItem"
+               TargetType="controls:RadialMenuCentralItem"
+               BasedOn="{StaticResource {x:Type controls:RadialMenuCentralItem}}">
 
             <Setter Property="Background" Value="DarkRed"/>
             <Setter Property="Opacity" Value="0.8"/>
@@ -24,7 +27,9 @@
             </Style.Triggers>
         </Style>
         <!--A Style that affects all other Item-->
-        <Style x:Key="FancyRadialMenuItem" TargetType="controls:RadialMenuItem" BasedOn="{StaticResource {x:Type controls:RadialMenuItem}}">
+        <Style x:Key="FancyRadialMenuItem"
+               TargetType="controls:RadialMenuItem"
+               BasedOn="{StaticResource {x:Type controls:RadialMenuItem}}">
 
             <Setter Property="Background" Value="LightSlateGray"/>
             <Setter Property="Opacity" Value="0.8"/>
@@ -61,6 +66,8 @@
             <Setter Property="Opacity" Value="1"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
+
+        <converters:ImageSourceToUriConverter x:Key="ImageSourceToUriConverter"/>
     </Window.Resources>
 
     <Grid >
@@ -84,57 +91,87 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
-        <Label Content="Seleccionar Perfil:" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"></Label>
-        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="ProfileBox">
-            <ComboBoxItem Content="Perfil 1" IsSelected="True"></ComboBoxItem>
-            <ComboBoxItem Content="Perfil 2"></ComboBoxItem>
-        </ComboBox>
 
-        <Label Grid.Column="3" Grid.Row="1"
-               Content="Configuracion de Botones" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="62,0,63,0" Height="30" Width="147" />
+        <Label Content="Seleccionar Perfil:" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"></Label>
+        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="ProfileBox"
+                  DisplayMemberPath="Value" SelectedValuePath="Key"
+                  SelectedValue="{Binding SelectedProfileId}"
+                  SelectionChanged="ProfileBox_SelectionChanged"/>
+
+        <Label
+            Grid.Column="3" Grid.Row="1"
+            Content="Configuracion de Botones"
+            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="62,0,63,0"
+            Height="30" Width="147" />
+
         <Label Grid.Column="3" Grid.Row="2" Content="Nombre Del Comando" />
         <TextBox Grid.Column="3" Grid.Row="3" x:Name="ButtonName" Margin="0,0,0,5" 
-                 Text="{Binding Button.Name , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Path=CurrentEditingButton.Name}"/>
+
         <Label Grid.Column="3" Grid.Row="4" Content="Inserte Atajo en el Teclado:" />
         <TextBox Grid.Column="3" Grid.Row="5"
-                 Text="{Binding Button.Shortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Path=CurrentEditingButton.Shortcut}"/>
+
         <Label Content="Seleccionar Icono:" Grid.Column="3" Grid.Row="6"></Label>
-        <Button x:Name="SearchIcon" Content="Seleccionar Icono" Grid.Column="3" Grid.Row="7" Click="SearchIcon_Click" ></Button>
+        <Button x:Name="SearchIcon" Grid.Column="3" Grid.Row="7"
+                Click="SearchIcon_Click" Content="Seleccionar Icono"/>
+
         <Button Grid.Column="3" Grid.Row="8" x:Name="UpdateButton"
-                    Content="Actualizar" Margin="0,29,0,-23" Grid.RowSpan="3" Click="UpdateButton_Click" />
+                Content="Actualizar" Margin="0,29,0,-23" Grid.RowSpan="3"
+                Click="UpdateButton_Click" />
+
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="2"
-                   VerticalAlignment="Top" Dock="Left" Height="300" RenderTransformOrigin="0.494,0.65"
-                   >
+                   VerticalAlignment="Top" Dock="Left" Height="300"
+                   RenderTransformOrigin="0.494,0.65">
             <controls:RadialMenu IsOpen="True">
                 <controls:RadialMenu.CentralItem>
-                    <controls:RadialMenuCentralItem  IsCancel="True" 
-                                                     ToolTip="Cerrar Menu Radial"
-                                                     Style="{DynamicResource FancyRadialMenuCentralItem}" IsDefault="True">
-                        <Image  Height="32"/>
+                    <controls:RadialMenuCentralItem
+                        IsCancel="True" ToolTip="Cerrar Menu Radial"
+                        Style="{DynamicResource FancyRadialMenuCentralItem}" IsDefault="True">
                     </controls:RadialMenuCentralItem>
                 </controls:RadialMenu.CentralItem>
 
-                <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}"
-                                     x:Name="Button1" Click="Button1_Click"   
-                                         >
-                    <Image  Height="23"/>
+                <controls:RadialMenuItem
+                    Style="{DynamicResource FancyRadialMenuItem}" x:Name="Button1"
+                    Click="Button1_Click" DataContext="{Binding CurrentButtonOne}">
+                    <StackPanel>
+                        <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
+
                 </controls:RadialMenuItem>
-                <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button2" Click="Button2_Click" >
-                    <Image  Height="23"/>
+                <controls:RadialMenuItem
+                    Style="{DynamicResource FancyRadialMenuItem}" x:Name="Button2"
+                    Click="Button2_Click" DataContext="{Binding CurrentButtonTwo}">
+                    <StackPanel>
+                        <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
+
                 </controls:RadialMenuItem>
-                <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button3" Click="Button3_Click" >
-                    <Image  Height="23"/>
+                <controls:RadialMenuItem
+                    Style="{DynamicResource FancyRadialMenuItem}" x:Name="Button3"
+                    Click="Button3_Click" DataContext="{Binding CurrentButtonThree}">
+                    <StackPanel>
+                        <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
                 </controls:RadialMenuItem>
-                <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button4" Click="Button4_Click" >
-                    <Image  Height="23"/>
+                <controls:RadialMenuItem
+                    Style="{DynamicResource FancyRadialMenuItem}" x:Name="Button4"
+                    Click="Button4_Click" DataContext="{Binding CurrentButtonFour}">
+                    <StackPanel>
+                        <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
                 </controls:RadialMenuItem>
-                <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     x:Name="Button5" Click="Button5_Click" >
-                    <Image  Height="23"/>
+                <controls:RadialMenuItem
+                    Style="{DynamicResource FancyRadialMenuItem}" x:Name="Button5"
+                    Click="Button5_Click" DataContext="{Binding CurrentButtonFive}">
+                    <StackPanel>
+                        <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
                 </controls:RadialMenuItem>
 
             </controls:RadialMenu>
