@@ -1,54 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using RadialMenu;
-using System.Windows.Resources;
+using WpfApplication1.Models;
+using WpfApplication1.ViewModels;
+using WinForms = System.Windows.Forms;
 
 namespace WpfApplication1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        readonly ObservableCollection<MainViewModel> ViewModelCollection;
+        readonly MainViewModel ViewModel;
+
         public MainWindow()
         {
-            #region "Sound"
-            #endregion
-            var point = GetMousePositionWindowsForms();
-            this.Left = point.X - 175;
-            this.Top = point.Y - 175;
             InitializeComponent();
 
+            ViewModelCollection = new ObservableCollection<MainViewModel>
+            {
+                new MainViewModel()
+            };
+            ViewModel = ViewModelCollection.ElementAt(0);
+
+            var profile = App.Profiles.FirstOrDefault() ?? new RadialMenuConfig();
+
+            ViewModel.CurrentButtonOne = profile.Buttons[0];
+            ViewModel.CurrentButtonTwo = profile.Buttons[1];
+            ViewModel.CurrentButtonThree = profile.Buttons[2];
+            ViewModel.CurrentButtonFour = profile.Buttons[3];
+            ViewModel.CurrentButtonFive = profile.Buttons[4];
+
+            DataContext = ViewModel;
         }
         private void PlayOpeningSound()
         {
-            Uri soundUrl = new Uri(@"pack://application:,,,/RadialApplication;component/icons/opensound.wav");
-            StreamResourceInfo sri = Application.GetResourceStream(soundUrl);
-            System.Media.SoundPlayer startSoundPlayer = new System.Media.SoundPlayer(sri.Stream);
+            var soundUrl = new Uri(@"pack://application:,,,/RadialApplication;component/icons/opensound.wav");
+            var sri = Application.GetResourceStream(soundUrl);
+            var startSoundPlayer = new SoundPlayer(sri.Stream);
             startSoundPlayer.Play();
 
         }
 
         private void RadialMenuCentralItem_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
             this.Close();
         }
         public static Point GetMousePositionWindowsForms()
         {
-            var point = System.Windows.Forms.Control.MousePosition;
+            var point = WinForms.Control.MousePosition;
             return new Point(point.X, point.Y);
         }
         public void Dispose()

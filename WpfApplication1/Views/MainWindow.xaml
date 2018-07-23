@@ -3,60 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:converters="clr-namespace:WpfApplication1.Infrastructure.Converters"
         xmlns:controls="clr-namespace:RadialMenu.Controls;assembly=RadialMenu"
         mc:Ignorable="d"
                 Title="Radial Menu" Height="350" Width="350" ShowInTaskbar="False" 
         AllowsTransparency="True" WindowStyle="None" >
     <Window.Background>
         <SolidColorBrush Opacity="0"/>
-
     </Window.Background>
 
-    <Grid >
-        <controls:RadialMenu IsOpen="True">
-            <controls:RadialMenu.CentralItem>
-                <controls:RadialMenuCentralItem  Click="RadialMenuCentralItem_Click"
-                                                     IsCancel="True" 
-                                                     ToolTip="Cerrar Menu Radial"
-                                                     Style="{DynamicResource FancyRadialMenuCentralItem}" IsDefault="True">
-                    <Image  Height="32"/>
-                </controls:RadialMenuCentralItem>
-            </controls:RadialMenu.CentralItem>
-
-            <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}"
-                                     ToolTip="DM Mirror"
-                                     x:Name="Mirror" >
-                <Image  Height="23"/>
-            </controls:RadialMenuItem>
-            <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     ToolTip="Load Family"
-                                     x:Name="LoadFamily" >
-                <Image  Height="23"/>
-            </controls:RadialMenuItem>
-            <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     ToolTip="Place Component"
-                                     x:Name="PlaceComponent" >
-                <Image  Height="23"/>
-            </controls:RadialMenuItem>
-            <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     ToolTip="Rotate" 
-                                     x:Name="Rotate" >
-                <Image  Height="23"/>
-            </controls:RadialMenuItem>
-            <controls:RadialMenuItem Style="{DynamicResource FancyRadialMenuItem}" 
-                                     ToolTip="Create Window"
-                                     x:Name="CreateWindow" >
-                <Image  Height="23"/>
-            </controls:RadialMenuItem>
-
-        </controls:RadialMenu>
-
-
-    </Grid>
     <Window.Resources>
         <!--A Style that affects all Close Item-->
-        <Style x:Key="FancyRadialMenuCentralItem" TargetType="controls:RadialMenuCentralItem" BasedOn="{StaticResource {x:Type controls:RadialMenuCentralItem}}">
+        <Style x:Key="FancyRadialMenuCentralItem"
+               TargetType="controls:RadialMenuCentralItem"
+               BasedOn="{StaticResource {x:Type controls:RadialMenuCentralItem}}">
 
             <Setter Property="Background" Value="DarkRed"/>
             <Setter Property="Opacity" Value="0.8"/>
@@ -71,7 +31,9 @@
             </Style.Triggers>
         </Style>
         <!--A Style that affects all other Item-->
-        <Style x:Key="FancyRadialMenuItem" TargetType="controls:RadialMenuItem" BasedOn="{StaticResource {x:Type controls:RadialMenuItem}}">
+        <Style x:Key="FancyRadialMenuItem"
+               TargetType="controls:RadialMenuItem"
+               BasedOn="{StaticResource {x:Type controls:RadialMenuItem}}">
 
             <Setter Property="Background" Value="LightSlateGray"/>
             <Setter Property="Opacity" Value="0.8"/>
@@ -108,5 +70,67 @@
             <Setter Property="Opacity" Value="1"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
+
+        <converters:ImageSourceToUriConverter x:Key="ImageSourceToUriConverter"/>
     </Window.Resources>
+
+    <Grid >
+        <controls:RadialMenu IsOpen="True">
+            <controls:RadialMenu.CentralItem>
+                <controls:RadialMenuCentralItem
+                    Click="RadialMenuCentralItem_Click"
+                    IsCancel="True" ToolTip="Cerrar Menu Radial"
+                    Style="{DynamicResource FancyRadialMenuCentralItem}" IsDefault="True">
+                    <Image  Height="32"/>
+                </controls:RadialMenuCentralItem>
+            </controls:RadialMenu.CentralItem>
+
+            <controls:RadialMenuItem
+                Style="{DynamicResource FancyRadialMenuItem}"
+                ToolTip="DM Mirror" x:Name="Mirror"
+                DataContext="{Binding CurrentButtonOne}">
+                <StackPanel>
+                    <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </StackPanel>
+            </controls:RadialMenuItem>
+            <controls:RadialMenuItem
+                Style="{DynamicResource FancyRadialMenuItem}"
+                ToolTip="{Binding Path=Tooltip}" x:Name="LoadFamily"
+                DataContext="{Binding CurrentButtonTwo}">
+                <StackPanel>
+                    <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </StackPanel>
+            </controls:RadialMenuItem>
+            <controls:RadialMenuItem
+                Style="{DynamicResource FancyRadialMenuItem}"
+                ToolTip="{Binding Path=Tooltip}" x:Name="PlaceComponent"
+                DataContext="{Binding CurrentButtonThree}">
+                <StackPanel>
+                    <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </StackPanel>
+            </controls:RadialMenuItem>
+            <controls:RadialMenuItem
+                Style="{DynamicResource FancyRadialMenuItem}"
+                ToolTip="{Binding Path=Tooltip}" x:Name="Rotate"
+                DataContext="{Binding CurrentButtonFour}">
+                <StackPanel>
+                    <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </StackPanel>
+            </controls:RadialMenuItem>
+            <controls:RadialMenuItem
+                Style="{DynamicResource FancyRadialMenuItem}"
+                ToolTip="{Binding Path=Tooltip}" x:Name="CreateWindow"
+                DataContext="{Binding CurrentButtonFive}">
+                <StackPanel>
+                    <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </StackPanel>
+            </controls:RadialMenuItem>
+
+        </controls:RadialMenu>
+    </Grid>
 </Window>

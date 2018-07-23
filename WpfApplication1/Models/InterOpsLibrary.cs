@@ -22,9 +22,9 @@ namespace WpfApplication1.Models
         {
             var json = File.ReadAllText(FilePath);
 
-            var obj = JsonConvert.DeserializeObject<IList<RadialMenuConfig>>(json);
+            var profiles = JsonConvert.DeserializeObject<IList<RadialMenuConfig>>(json);
 
-            return obj;
+            return profiles ?? new List<RadialMenuConfig>();
         }
     }
 }

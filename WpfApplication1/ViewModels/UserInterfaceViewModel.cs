@@ -1,5 +1,4 @@
 ﻿using PropertyChanged;
-using System.Collections.Generic;
 using WpfApplication1.Models;
 
 namespace WpfApplication1.ViewModels
@@ -18,7 +17,5 @@ namespace WpfApplication1.ViewModels
         public RadialMenuButton CurrentButtonFive { get; set; } = null;
 
         public RadialMenuButton CurrentEditingButton { get; set; } = null;
-
-        public IList<RadialMenuConfig> Profiles { get; set; } = null;
     }
 }

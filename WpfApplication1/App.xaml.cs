@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
+using WpfApplication1.Models;
 
 namespace WpfApplication1
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public static IList<RadialMenuConfig> Profiles { get; private set; } = InterOpsLibrary.ReadMenuConfig();
     }
 }

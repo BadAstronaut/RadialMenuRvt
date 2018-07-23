@@ -138,7 +138,6 @@
                         <Image Height="23" Source="{Binding Path=IconPath, Converter={StaticResource ImageSourceToUriConverter}}" />
                         <TextBlock Text="{Binding Path=Name}"/>
                     </StackPanel>
-
                 </controls:RadialMenuItem>
                 <controls:RadialMenuItem
                     Style="{DynamicResource FancyRadialMenuItem}" x:Name="Button2"

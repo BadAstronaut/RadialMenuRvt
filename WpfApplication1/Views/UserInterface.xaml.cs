@@ -25,12 +25,11 @@ namespace WpfApplication1.Views
                 new UserInterfaceViewModel()
             };
             ViewModel = ViewModelCollection.ElementAt(0);
-            ViewModel.Profiles = InterOpsLibrary.ReadMenuConfig();
 
             var profileIndex = 0;
-            ProfileBox.ItemsSource = ViewModel.Profiles.Select(s => new KeyValuePair<string, string>(s.ProfileId, "Profile " + (++profileIndex).ToString()));
+            ProfileBox.ItemsSource = App.Profiles.Select(s => new KeyValuePair<string, string>(s.ProfileId, "Profile " + (++profileIndex).ToString()));
 
-            ViewModel.SelectedProfileId = ViewModel.Profiles.ElementAt(0).ProfileId;
+            ViewModel.SelectedProfileId = App.Profiles.ElementAt(0).ProfileId;
 
             DataContext = ViewModel;
         }
@@ -94,14 +93,14 @@ namespace WpfApplication1.Views
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            InterOpsLibrary.SaveConfig(ViewModel.Profiles);
+            InterOpsLibrary.SaveConfig(App.Profiles);
         }
 
         private void ProfileBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var profileId = ((KeyValuePair<string, string>)e.AddedItems[0]).Key;
 
-            var profile = ViewModel.Profiles.FirstOrDefault(w => w.ProfileId == profileId);
+            var profile = App.Profiles.FirstOrDefault(w => w.ProfileId == profileId);
 
             ViewModel.CurrentButtonOne = profile.Buttons[0];
             ViewModel.CurrentButtonTwo = profile.Buttons[1];
