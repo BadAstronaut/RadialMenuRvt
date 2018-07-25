@@ -139,9 +139,6 @@
     <Resource Include="Icons\Rotate.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="temp\Instructions.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\fImRN49.png" />
     <Resource Include="Icons\wtpG1ni.png" />
   </ItemGroup>
