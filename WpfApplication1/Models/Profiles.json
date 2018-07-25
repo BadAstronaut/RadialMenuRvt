@@ -1,66 +1,72 @@
 [
   {
-    "B1": {
-      "Name": "Load Element",
-      "Shortcut": "LO",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    },
-    "B2": {
-      "Name": "Copy Element",
-      "Shortcut": "CO",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Copiar Elementos"
-    },
-    "B3": {
-      "Name": "Window",
-      "Shortcut": "WN",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    },
-    "B4": {
-      "Name": "Door",
-      "Shortcut": "DR",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    },
-    "B5": {
-      "Name": "Column",
-      "Shortcut": "CL",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    }
+    "ProfileId": "ac43b664-a6c3-43e8-a55a-6318dd2b9cc6",
+    "Buttons": [
+      {
+        "Name": "Load Element",
+        "Shortcut": "LO",
+        "IconPath": "wtpG1ni.png",
+        "Tooltip": "Cargar Elementos"
+      },
+      {
+        "Name": "Copy Element",
+        "Shortcut": "CO",
+        "IconPath": "fImRN49.png",
+        "Tooltip": "Copiar Elementos"
+      },
+      {
+        "Name": "Window",
+        "Shortcut": "WN",
+        "IconPath": "Mirror.png",
+        "Tooltip": "Cargar Elementos"
+      },
+      {
+        "Name": "Door",
+        "Shortcut": "DR",
+        "IconPath": "LoadF.png",
+        "Tooltip": "Cargar Elementos"
+      },
+      {
+        "Name": "Column",
+        "Shortcut": "CL",
+        "IconPath": "Rotate.png",
+        "Tooltip": "Cargar Elementos"
+      }
+    ]
   },
   {
-    "B1": {
-      "Name": "Load Element",
-      "Shortcut": "LO",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    },
-    "B2": {
-      "Name": "Copy Element",
-      "Shortcut": "CO",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Copiar Elementos"
-    },
-    "B3": {
-      "Name": "Window",
-      "Shortcut": "WN",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    },
-    "B4": {
-      "Name": "Door",
-      "Shortcut": "DR",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    },
-    "B5": {
-      "Name": "Column",
-      "Shortcut": "CL",
-      "IconPath": "\\Icons\\LoadF.png",
-      "Tooltip": "Cargar Elementos"
-    }
+    "ProfileId": "41e0a16d-3861-4a20-ad75-06ceec19d40c",
+    "Buttons": [
+      {
+        "Name": "Load Element 2",
+        "Shortcut": "LO2",
+        "IconPath": "LoadF.png",
+        "Tooltip": "Cargar Elementos"
+      },
+      {
+        "Name": "Copy Element 2",
+        "Shortcut": "CO2",
+        "IconPath": "LoadF.png",
+        "Tooltip": "Copiar Elementos"
+      },
+      {
+        "Name": "Window 2",
+        "Shortcut": "WN2",
+        "IconPath": "LoadF.png",
+        "Tooltip": "Cargar Elementos"
+      },
+      {
+        "Name": "Door 2",
+        "Shortcut": "DR2",
+        "IconPath": "LoadF.png",
+        "Tooltip": "Cargar Elementos"
+      },
+      {
+        "Name": "Column 2",
+        "Shortcut": "CL",
+        "IconPath": "LoadF.png",
+        "Tooltip": "Cargar Elementos"
+      }
+    ]
   }
 ]

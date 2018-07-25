@@ -1,9 +1,8 @@
 ﻿using PropertyChanged;
 
-namespace WpfApplication1.ViewModels
+namespace WpfApplication1.Models
 {
-    [AddINotifyPropertyChangedInterface]
-    public class ButtonViewModel
+    public class RadialMenuButton
     {
         public string Name { set; get; }
 
