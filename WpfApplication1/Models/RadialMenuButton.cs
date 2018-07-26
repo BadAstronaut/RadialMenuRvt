@@ -2,6 +2,7 @@
 
 namespace WpfApplication1.Models
 {
+    [AddINotifyPropertyChangedInterface]
     public class RadialMenuButton
     {
         public string Name { set; get; }
